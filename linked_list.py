@@ -46,11 +46,13 @@ class LinkedList:
   # TODO: Implement the get_node method here
   def get_node(self, position):
     curr = self._head
+    count = 0
     while curr:
-      if curr._value == position:
+      if count == position:
         return curr
-      curr = self._next
-      
+      count += 1
+      curr = curr._next
+
 
   # TODO: Implement the add_to_tail method here
   def add_to_tail(self, value):
@@ -61,15 +63,30 @@ class LinkedList:
       self._length = 1
       return self._head
     else:
+      # new_node._next = self._tail
+      # self._tail = new_node
+      # self._length += 1
+      # return self._tail
       self._tail._next = new_node
-      new_node._tail = self._tail
+      # self._tail = new_node
       self._length += 1
-      return self._head
-    
+      return self._tail
+
 
   # TODO: Implement the add_to_head method here
   def add_to_head(self, value):
-    pass
+    new_node = Node(value)
+    if self._head == None:
+      self._head = new_node
+      self._tail = new_node
+      self._length = 1
+      return self._head
+    else:
+      new_node._next = self._head
+      self._head = new_node
+      self._length += 1
+      return self._head
+
 
   # TODO: Implement the remove_head method here
   def remove_head(self):
@@ -102,7 +119,7 @@ class LinkedList:
     pass
 
   # TODO: Implement the __str__ method here
-  # Your code here 
+  # Your code here
 
 # Phase 1 Manual Testing:
 
@@ -122,9 +139,9 @@ print(linked_list.get_node(0))                # <__main__.Node object at ...>
 print(linked_list.get_node(0)._value)         # `new tail node`
 
 # # 4. Test adding a node to list's head
-# linked_list.add_to_head('new head node')
-# print(linked_list.get_node(0))                # <__main__.Node object at ...>
-# print(linked_list.get_node(0)._value)         # `new head node`
+linked_list.add_to_head('new head node')
+print(linked_list.get_node(0))                # <__main__.Node object at ...>
+print(linked_list.get_node(0)._value)         # `new head node`
 
 # # 5. Test removing the head node
 # linked_list.remove_head()
